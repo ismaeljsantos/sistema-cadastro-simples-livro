@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "titulo": "Pequeno principe",
+        "autor": "ismael",
+        "ano": "1996-04-05"
+    },
+    {
+        "id": 2,
+        "titulo": "O pequeno principe",
+        "autor": "ismael j santos",
+        "ano": "1998-01-16"
+    },
+    {
+        "id": 3,
+        "titulo": "Bíblia Sagrada",
+        "autor": "James",
+        "ano": "2000-04-05"
+    }
+]
