@@ -17,9 +17,11 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Alunos</title>
     <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
         body {font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 50px;}
         .content {max-width: 1300px; margin: 50px auto 0; padding: 20px; background: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
         h1 {text-align: center; color: #333;}
+        h2 {margin-bottom: 20px; color: #333;}
         table {width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
         th, td {padding: 12px 15px; border: 1px solid #ccc; text-align: left;}
         th {background-color: #007bff; color: white;}
@@ -88,10 +90,10 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Confirmar Exclusão</h2>
-            <p>Tem certeza que deseja excluir este aluno?<br><i>Esta ação não pode ser desfeita.</i></p>
+            <p>Tem certeza que deseja excluir este aluno?<i style="color: #6c757d; display:block; margin-top: 5px;">Esta ação não pode ser desfeita.</i></p>
             <form action="excluir_aluno.php" method="POST">
                 <input type="hidden" name="id" id="delete-aluno-id" value="">
-                <button type="submit" class="btn btn-delete">Sim, Excluir</button>
+                <button type="submit" class="btn btn-delete">Sim, Excluir!</button>
             </form>
         </div>
     </div>
