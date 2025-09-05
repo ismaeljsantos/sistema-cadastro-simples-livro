@@ -9,6 +9,46 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
         $alunos = $dados_decodificados;
     }
 }
+
+$mensagem = "";
+if(isset($_GET['status'])){
+    if($_GET['status'] == 'deleted'){
+        $mensagem = "Aluno excluído com sucesso.";
+    } elseif($_GET['status'] == 'updated'){
+        $mensagem = "Aluno atualizado com sucesso.";
+    } elseif($_GET['status'] == 'error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Ocorreu um erro desconhecido.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'not_found'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Aluno não encontrado.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'invalid_id'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'ID inválido.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'file_error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Erro ao acessar o arquivo de dados.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'json_error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Erro ao processar os dados JSON.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'save_error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Erro ao salvar os dados.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'missing_id'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'ID não fornecido.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'fetch_error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Erro ao buscar os dados do aluno.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'unknown_error'){
+        $mensagem_erro = isset($_GET['message']) ? $_GET['message'] : 'Ocorreu um erro desconhecido.';
+        $mensagem = "Erro: " . $mensagem_erro;
+    } elseif($_GET['status'] == 'success'){
+        $mensagem = "Aluno atualizado com sucesso!";
+    } else {
+        $mensagem = "Status desconhecido.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,6 +84,9 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
         .modal-content label { display: block; margin-top: 10px; }
         .modal-content input { width: 95%; padding: 8px; margin-top: 5px; }
         .modal-content button[type="submit"] { width: 100%; margin-top: 20px; }
+        .mensagem {display: block;width: 100%;padding: 10px;border-radius: 4px;margin-top: 20px;border: 1px solid transparent;}
+        .mensagem.success {background-color: #d4edda; color: #155724; border-color: #c3e6cb;}
+        .mensagem.error {background-color: #f8d7da;color: #721c24;border-color: #f5c6cb;}
     </style>
 </head>
 <body>
@@ -102,9 +145,12 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Editar Aluno</h2>
+            <?php if(!empty($mensagem)): 
+                $classe_da_mensagem = (strpos($mensagem, 'Erro') === 0) ? 'error' : 'success';
+                ?>
+                <div class="mensagem <?php echo $classe_da_mensagem; ?>"><?php echo $mensagem; ?></div>
+            <?php endif; ?>
             <form action="editar_aluno.php" method="POST">
-                <input type="hidden" name="id" id="edit-aluno-id" value="">
-                
                 <label for="edit-nome">Nome:</label>
                 <input type="text" name="nome" id="edit-nome" required>
                 
@@ -116,7 +162,8 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
                 
                 <label for="edit-data_nascimento">Data de Nascimento:</label>
                 <input type="date" name="data_nascimento" id="edit-data_nascimento" required>
-                
+
+                <input type="hidden" name="id" id="edit-aluno-id" value="">
                 <button type="submit" class="btn btn-edit">Salvar Alterações</button>
             </form>
         </div>
@@ -191,6 +238,14 @@ if(file_exists($caminhoArquivo) && is_readable($caminhoArquivo)){
                 modalDelete.style.display = "none";
             }
         }
+        document.querySelectorAll('.mensagem').forEach(function(element) {
+            setTimeout(function() {
+                element.style.opacity = '0';
+                setTimeout(function() {
+                    element.style.display = 'none';
+                }, 600);
+            }, 5000);
+        });
     </script>
 </body>
 </html>

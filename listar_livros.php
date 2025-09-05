@@ -10,6 +10,7 @@
             $livros = $dados_decodificados;
         }
     } 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,7 +39,7 @@
         .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; }
         .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
         .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
-
+        
     </style>
 </head>
 <body>
@@ -68,7 +69,7 @@
                     <td><?php echo htmlspecialchars($livro['autor']); ?></td>
                     <td><?php echo htmlspecialchars(date('d/m/Y', strtotime($livro['ano']))); ?></td>
                     <td class="acoes">
-                        <a class="btn btn-edit" href="editar_livro_gemini.php?id=<?php echo htmlspecialchars($livro['id']); ?>">Editar</a>
+                        <a class="btn btn-edit" href="editar_livro.php?id=<?php echo htmlspecialchars($livro['id']); ?>">Editar</a>
                         <a id="delete" class="btn btn-delete" data-id="<?php echo htmlspecialchars($livro['id']); ?>">Excluir</a>
                     </td>
                 </tr>

@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "id": 1,
+        "nome": "Ismael Souza",
+        "email": "ismael.teste@gmail.com",
+        "telefone": "79981310474",
+        "data_nascimento": "2002-02-12"
+    },
+    {
+        "id": 2,
+        "nome": "Ismael j s",
+        "email": "ismael.jhs@gmail.com",
+        "telefone": "79981310474",
+        "data_nascimento": "2004-04-05"
+    }
+]
